@@ -1,0 +1,45 @@
+matcherConfig:
+  exactMatch: true
+  labelMatchers:
+    - [self-hosted, windows, x64, windows-latest]
+    - [self-hosted, windows, x64, windows-2022]
+fifo: true
+delay_webhook_event: 5
+runner_config:
+  enable_ephemeral_runners: true
+  instance_target_capacity_type: "on-demand"
+  enable_userdata: false
+  runner_os: windows
+  runner_run_as: Administrator
+  runner_architecture: x64
+  runner_extra_labels: "windows-2022, windows-latest"
+  runner_name_prefix: windows-2022-x64_
+  enable_ssm_on_runners: true
+  instance_types:
+    - m5.large
+    - c5.large
+  runners_maximum_count: 10
+  scale_down_schedule_expression: cron(* * * * ? *)
+  runner_boot_time_in_minutes: 20
+  ami_owners:
+    - "047402373783"
+  ami_filter:
+    name:
+      # - ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
+      # - github-runner-windows-core-2022-amd64-*
+      - github-runner-windows-core-2022-amd64-202305242213
+  block_device_mappings:
+    - device_name: /dev/sda1
+      delete_on_termination: true
+      volume_type: gp3
+      volume_size: 50
+      encrypted: true
+      iops: null
+      throughput: null
+      kms_key_id: null
+      snapshot_id: null
+  runner_log_files:
+    - log_group_name: user_data
+      prefix_log_group: true
+      file_path: "C:\\ProgramData\\Amazon\\EC2Launch\\log\\agent.log*"
+      log_stream_name: "{instance_id}/user_data"
