@@ -1,19 +1,20 @@
 matcherConfig:
   exactMatch: true
   labelMatchers:
-    - [ self-hosted, linux, x64, ubuntu-2004 ]
+    - [ self-hosted, linux, x64, ubuntu-20.04-aws ]
 fifo: true
 delay_webhook_event: 0
 redrive_build_queue:
   enabled: false
   maxReceiveCount: null
 runner_config:
+  create_service_linked_role_spot: true
   enable_ephemeral_runners: true
-  instance_target_capacity_type: "on-demand"
+  instance_target_capacity_type: "spot"
   enable_userdata: false
   runner_os: linux
   runner_architecture: x64
-  runner_extra_labels: "ubuntu-2004"
+  runner_extra_labels: "ubuntu-20.04-aws"
   runner_run_as: ubuntu
   runner_name_prefix: ubuntu-2004-x64_
   enable_ssm_on_runners: true
@@ -25,9 +26,7 @@ runner_config:
   # userdata_template: ./templates/user-data.sh
   ami_owners:
     - "047402373783" 
-  ami_filter:
-    name:
-      - github-runner-ubuntu-focal-amd64-*
+  ami_filter: { 'name': ['github-runner-ubuntu-focal-amd64-202306021546'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true

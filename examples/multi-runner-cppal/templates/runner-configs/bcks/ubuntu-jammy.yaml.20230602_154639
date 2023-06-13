@@ -1,33 +1,33 @@
 matcherConfig:
   exactMatch: true
   labelMatchers:
-    - [ self-hosted, linux, arm64, ubuntu-1804 ]
+    - [ self-hosted, linux, x64, ubuntu-latest-aws ]
+    - [ self-hosted, linux, x64, ubuntu-22.04-aws ]
 fifo: true
 delay_webhook_event: 0
 redrive_build_queue:
   enabled: false
   maxReceiveCount: null
 runner_config:
+  create_service_linked_role_spot: true
   enable_ephemeral_runners: true
-  instance_target_capacity_type: "on-demand"
+  instance_target_capacity_type: "spot"
   enable_userdata: false
   runner_os: linux
-  runner_architecture: arm64
-  runner_extra_labels: "ubuntu-1804"
+  runner_architecture: x64
+  runner_extra_labels: "ubuntu-22.04-aws, ubuntu-latest-aws"
   runner_run_as: ubuntu
-  runner_name_prefix: ubuntu-1804-arm64_
+  runner_name_prefix: ubuntu-2204-x64_
   enable_ssm_on_runners: true
   instance_types:
-    - t4g.large
-    - c6g.large
+    - m5ad.large
+    - m5a.large
   runners_maximum_count: 10
   scale_down_schedule_expression: cron(* * * * ? *)
   # userdata_template: ./templates/user-data.sh
   ami_owners:
     - "047402373783" 
-  ami_filter:
-    name:
-      - github-runner-ubuntu-bionic-arm64-*
+  ami_filter: { 'name': 'github-runner-ubuntu-jammy-202306021546' }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true

@@ -7,7 +7,6 @@
 region = "us-west-2"
 instance_type = "t2.xlarge"
 root_volume_size_gb = 50
-# Based on drone-ci dockerfiles
 custom_shell_commands = [
 "cd C:\\",
 "# if --version is mentioned, the version has been checked, and the package installed",

@@ -7,9 +7,6 @@
 region = "us-west-2"
 instance_type = "t2.xlarge"
 root_volume_size_gb = 50
-# Based on drone-ci dockerfiles
-# upgrading mingw to see if boostorg/url will build
-# choco install -y mingw --version 8.1.0
 custom_shell_commands = [
 "cd C:\\",
 "# already installed: powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))",
