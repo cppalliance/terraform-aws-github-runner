@@ -6,11 +6,12 @@
 # ubuntu-focal-cppal
 # ubuntu-jammy-arm64-cppal
 # ubuntu-jammy-cppal
-# windows-core-2019-cppal
-# windows-core-2022-cppal
+# windows-2019-cppal
+# windows-2022-cppal
 
 imagestobuild="
-ubuntu-focal-cppal
+windows-2019-cppal
+windows-2022-cppal
 "
 
 timestamp=$(date +%Y%m%d_%H%M%S)

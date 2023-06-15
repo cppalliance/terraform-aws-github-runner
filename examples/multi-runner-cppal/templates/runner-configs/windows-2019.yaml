@@ -23,12 +23,13 @@ runner_config:
   runner_boot_time_in_minutes: 20
   ami_owners:
     - "047402373783"
-  ami_filter: { 'name': ['github-runner-windows-core-2019-amd64-202305242335'] }
+  ami_filter: { 'name': ['github-runner-windows-core-2019-amd64-202306151516'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
       volume_type: gp3
-      volume_size: 50
+      # boostorg/math crashed with 50. Setting it to 60.
+      volume_size: 60
       encrypted: true
       iops: null
       throughput: null

@@ -8,7 +8,11 @@ region = "us-west-2"
 instance_type = "t2.xlarge"
 tester1="$${PATH}"
 root_volume_size_gb = 30
+custom_shell_commands = [
 "set -xe",
+"sudo mkdir -p /etc/apt/apt.conf.d/",
+"echo 'APT::Acquire::Retries \"10\";' | sudo tee /etc/apt/apt.conf.d/80-retries",
+"echo 'APT::Get::Assume-Yes \"true\";' | sudo tee /etc/apt/apt.conf.d/90assumeyes",
 "DEBIAN_FRONTEND=noninteractive sudo apt-get -y install tzdata && sudo apt-get -o Acquire::Retries=3 install -y sudo software-properties-common wget curl apt-transport-https git make apt-file sudo unzip libssl-dev build-essential autotools-dev autoconf automake g++ g++-12 python3 python3-pip rsync ruby cpio pkgconf ccache",
 "sudo apt-get install -y gcc-multilib || true",
 "sudo apt-get install -y g++-multilib || true",
