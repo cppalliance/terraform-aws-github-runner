@@ -1,8 +1,7 @@
 matcherConfig:
   exactMatch: true
   labelMatchers:
-    - [self-hosted, windows, x64, windows-latest-aws]
-    - [self-hosted, windows, x64, windows-2022-aws]
+    - [self-hosted, windows, x64, windows-2019-msvc140-aws]
 fifo: true
 delay_webhook_event: 0
 runner_config:
@@ -13,8 +12,8 @@ runner_config:
   runner_os: windows
   runner_run_as: Administrator
   runner_architecture: x64
-  runner_extra_labels: "windows-latest-aws,windows-2022-aws"
-  runner_name_prefix: windows-2022-x64_
+  runner_extra_labels: "windows-2019-msvc140-aws"
+  runner_name_prefix: windows-2019-msvc-14.0-x64_
   enable_ssm_on_runners: true
   instance_types:
     - m5.large
@@ -24,7 +23,7 @@ runner_config:
   runner_boot_time_in_minutes: 20
   ami_owners:
     - "047402373783"
-  ami_filter: { 'name': ['github-runner-windows-2022-amd64-202306161445'] }
+  ami_filter: { 'name': ['github-runner-windows-2019-msvc140-amd64-202306161445'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
@@ -39,5 +38,6 @@ runner_config:
   runner_log_files:
     - log_group_name: user_data
       prefix_log_group: true
-      file_path: "C:\\ProgramData\\Amazon\\EC2Launch\\log\\agent.log*"
+      file_path: "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Log\\UserdataExecution.log*"
       log_stream_name: "{instance_id}/user_data"
+

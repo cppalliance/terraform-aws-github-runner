@@ -62,7 +62,7 @@ locals {
 source "amazon-ebs" "githubrunner" {
   ssh_keypair_name            = "cppalliance-us-west-2-kp"
   ssh_private_key_file        = "/root/.ssh/cppalliance-us-west-2-kp.pem"
-  ami_name                    = "github-runner-windows-2019-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
+  ami_name                    = "github-runner-windows-2019-msvc140-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
   communicator                = "winrm"
   instance_type               = var.instance_type
   region                      = var.region
