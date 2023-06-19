@@ -6,7 +6,7 @@
 # packer build . | tee output.out 2>&1
 region = "us-west-2"
 instance_type = "t2.xlarge"
-root_volume_size_gb = 50
+root_volume_size_gb = 60
 custom_shell_commands = [
 "cd C:\\",
 "# already installed: powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))",
@@ -59,10 +59,12 @@ custom_shell_commands = [
 "choco install -y python --version 3.8.3",
 "New-Item -ItemType SymbolicLink -Path \"C:\\Git\" -Target \"C:\\Program Files\\Git\"",
 "# Adding visualstudio2019",
-"choco install visualstudio2019-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.29.x86.x64\" -y",
+"choco install visualstudio2019-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.140\" \"--add Microsoft.VisualStudio.Component.VC.14.29.x86.x64\" -y",
 "$${oldpath} = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path",
 "$${newpath} = \"C:\\Git\\usr\\bin;$${oldpath}\"",
 "Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $${newPath}",
+"copy \"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\rc.exe\" \"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x86\\rc.exe\"",
+"copy \"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\rcdll.dll\" \"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x86\\rcdll.dll\"",
 "net user /add Administrator2 Testwin1234!",
 "net localgroup administrators Administrator2 /add",
 "echo almost done",

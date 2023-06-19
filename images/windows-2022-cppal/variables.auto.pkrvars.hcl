@@ -6,7 +6,7 @@
 # packer build . | tee output.out 2>&1
 region = "us-west-2"
 instance_type = "t2.xlarge"
-root_volume_size_gb = 50
+root_volume_size_gb = 60
 custom_shell_commands = [
 "cd C:\\",
 "# if --version is mentioned, the version has been checked, and the package installed",
