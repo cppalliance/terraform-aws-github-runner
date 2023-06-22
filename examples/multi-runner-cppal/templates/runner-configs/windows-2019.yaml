@@ -15,6 +15,7 @@ runner_config:
   runner_extra_labels: "windows-2019-aws"
   runner_name_prefix: windows-2019-x64_
   enable_ssm_on_runners: true
+  credit_specification: standard
   instance_types:
     - m5.large
     - c5.large

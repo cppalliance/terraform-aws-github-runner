@@ -1,23 +1,21 @@
 
 data "aws_route_table" "gha_public_rt" {
-  vpc_id        = module.vpc.vpc_id
+  vpc_id        = module.base.vpc.vpc_id
   tags		= {
-    Name        = "vpc-gha-public"
-    Environment = "gha"
+    Name        = "gha-vpc-public"
   }
 }
 
 data "aws_route_table" "gha_private_rt" {
-  vpc_id        = module.vpc.vpc_id
+  vpc_id        = module.base.vpc.vpc_id
   tags		= {
-    Name        = "vpc-gha-private"
-    Environment = "gha"
+    Name        = "gha-vpc-private"
   }
 }
 
 resource "aws_vpc_peering_connection" "peering1" {
   peer_vpc_id   = var.aws_default_vpc
-  vpc_id        = module.vpc.vpc_id
+  vpc_id        = module.base.vpc.vpc_id
   auto_accept   = true
 }
 
