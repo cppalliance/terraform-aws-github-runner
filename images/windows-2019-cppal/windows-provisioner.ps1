@@ -22,21 +22,18 @@ Set-Content -Path "$PsHome\Microsoft.PowerShell_profile.ps1" -Value $ChocoProfil
 
 refreshenv
 
-Write-Host "Installing cloudwatch agent, part 1"
+Write-Host "Installing cloudwatch agent..."
 Invoke-WebRequest -Uri https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/amazon-cloudwatch-agent.msi -OutFile C:\amazon-cloudwatch-agent.msi
+$cloudwatchParams = '/i', 'C:\amazon-cloudwatch-agent.msi', '/qn', '/L*v', 'C:\CloudwatchInstall.log'
+Start-Process "msiexec.exe" $cloudwatchParams -Wait -NoNewWindow
+Remove-Item C:\amazon-cloudwatch-agent.msi
 
 # Install dependent tools
 Write-Host "Installing additional development tools"
 choco install git awscli -y
 refreshenv
 
-Write-Host "Installing cloudwatch agent, part 2"
-# Delayed part 2 to ensure the download from part 1 completed and was written to disk
-$cloudwatchParams = '/i', 'C:\amazon-cloudwatch-agent.msi', '/qn', '/L*v', 'C:\CloudwatchInstall.log'
-Start-Process "msiexec.exe" $cloudwatchParams -Wait -NoNewWindow
-Remove-Item C:\amazon-cloudwatch-agent.msi
-
-Write-Host "Creating actions-runner directory for the GH Action installation"
+Write-Host "Creating actions-runner directory for the GH Action installtion"
 New-Item -ItemType Directory -Path C:\actions-runner ; Set-Location C:\actions-runner
 
 Write-Host "Downloading the GH Action runner from ${action_runner_url}"
