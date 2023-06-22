@@ -10,6 +10,7 @@ root_volume_size_gb = 60
 custom_shell_commands = [
 "cd C:\\",
 "# already installed: powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))",
+"choco feature enable -n allowGlobalConfirmation",
 "choco install -y visualstudio2017buildtools --version 15.9.18.0",
 "choco install -y 7zip.install --version 19.0",
 "choco install -y chocolatey --version 0.12.1",

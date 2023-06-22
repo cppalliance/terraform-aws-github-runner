@@ -8,10 +8,9 @@
 # ubuntu-jammy-cppal
 # windows-2019-cppal
 # windows-2022-cppal
-# windows-2019-msvc140-cppal
 
 imagestobuild="
-windows-2019-cppal
+windows-2022-cppal
 "
 
 timestamp=$(date +%Y%m%d_%H%M%S)

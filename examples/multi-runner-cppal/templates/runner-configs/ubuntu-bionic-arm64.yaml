@@ -21,7 +21,7 @@ runner_config:
   instance_types:
     - t4g.large
     - c6g.large
-  runners_maximum_count: 10
+  runners_maximum_count: 50
   scale_down_schedule_expression: cron(* * * * ? *)
   # userdata_template: ./templates/user-data.sh
   ami_owners:

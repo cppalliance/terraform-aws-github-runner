@@ -21,7 +21,7 @@ runner_config:
   instance_types:
     - m5ad.large
     - m5a.large
-  runners_maximum_count: 10
+  runners_maximum_count: 50
   scale_down_schedule_expression: cron(* * * * ? *)
   # userdata_template: ./templates/user-data.sh
   ami_owners:
