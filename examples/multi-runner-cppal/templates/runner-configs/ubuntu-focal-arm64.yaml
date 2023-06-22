@@ -18,6 +18,7 @@ runner_config:
   runner_run_as: ubuntu
   runner_name_prefix: ubuntu-2004-arm64_
   enable_ssm_on_runners: true
+  credit_specification: standard
   instance_types:
     - t4g.large
     - c6g.large
