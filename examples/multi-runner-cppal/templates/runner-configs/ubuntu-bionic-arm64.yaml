@@ -10,7 +10,7 @@ redrive_build_queue:
 runner_config:
   create_service_linked_role_spot: true
   enable_ephemeral_runners: true
-  instance_target_capacity_type: "spot"
+  instance_target_capacity_type: "on-demand"
   enable_userdata: false
   runner_os: linux
   runner_architecture: arm64
