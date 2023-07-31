@@ -10,7 +10,7 @@
 # windows-2022-cppal
 
 imagestobuild="
-windows-2022-cppal
+windows-2019-cppal
 "
 
 timestamp=$(date +%Y%m%d_%H%M%S)
