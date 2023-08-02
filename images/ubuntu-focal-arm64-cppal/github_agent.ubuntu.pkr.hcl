@@ -7,6 +7,24 @@ packer {
   }
 }
 
+variable "ssh_keypair_name" {
+  description = "SSH keypair name"
+  type        = string
+  default     = null
+}
+
+variable "ssh_private_key_file" {
+  description = "SSH private key file"
+  type        = string
+  default     = null
+}
+
+variable "disable_docker_registry" {
+  description = "SSH private key file"
+  type        = string
+  default     = "false"
+}
+
 variable "runner_version" {
   description = "The version (no v prefix) of the runner software to install https://github.com/actions/runner/releases. The latest release will be fetched from GitHub if not provided."
   default     = null
@@ -135,7 +153,8 @@ build {
   ]
   provisioner "shell" {
     environment_vars = [
-      "DEBIAN_FRONTEND=noninteractive"
+      "DEBIAN_FRONTEND=noninteractive",
+      "DISABLE_DOCKER_REGISTRY=${var.disable_docker_registry}"
     ]
     inline = concat([
       "sudo cloud-init status --wait",

@@ -7,6 +7,24 @@ packer {
   }
 }
 
+variable "ssh_keypair_name" {
+  description = "SSH keypair name"
+  type        = string
+  default     = null
+}
+
+variable "ssh_private_key_file" {
+  description = "SSH private key file"
+  type        = string
+  default     = null
+}
+
+variable "disable_docker_registry" {
+  description = "SSH private key file"
+  type        = string
+  default     = "false"
+}
+
 variable "runner_version" {
   description = "The version (no v prefix) of the runner software to install https://github.com/actions/runner/releases. The latest release will be fetched from GitHub if not provided."
   default     = null
@@ -72,8 +90,8 @@ locals {
 }
 
 source "amazon-ebs" "githubrunner" {
-  ssh_keypair_name            = "cppalliance-us-west-2-kp"
-  ssh_private_key_file        = "/root/.ssh/cppalliance-us-west-2-kp.pem"
+  ssh_keypair_name            = var.ssh_keypair_name
+  ssh_private_key_file        = var.ssh_private_key_file
   ami_name                    = "github-runner-windows-2022-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
   communicator                = "winrm"
   instance_type               = var.instance_type

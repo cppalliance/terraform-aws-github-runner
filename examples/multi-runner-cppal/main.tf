@@ -44,7 +44,7 @@ module "multi-runner" {
   #    }
   #  }
   aws_region                        = local.aws_region
-  key_name                          = "cppalliance-us-west-2-kp"
+  key_name                          = var.key_name
   vpc_id                            = module.base.vpc.vpc_id
   subnet_ids                        = module.base.vpc.private_subnets
   runners_scale_up_lambda_timeout   = 60
