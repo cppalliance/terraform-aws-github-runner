@@ -26,8 +26,7 @@ runner_config:
   runners_maximum_count: 50
   scale_down_schedule_expression: cron(* * * * ? *)
   # userdata_template: ./templates/user-data.sh
-  ami_owners:
-    - "047402373783"
+  ami_owners: [ "047402373783" ]
   ami_filter: { 'name': ['github-runner-ubuntu-jammy-arm64-202306161254'] }
   block_device_mappings:
     - device_name: /dev/sda1
