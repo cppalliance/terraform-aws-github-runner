@@ -7,6 +7,9 @@
 region = "us-west-2"
 instance_type = "t2.xlarge"
 root_volume_size_gb = 60
+ssh_keypair_name = "cppalliance-us-west-2-kp"
+ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
+
 custom_shell_commands = [
 "cd C:\\",
 "choco feature enable -n allowGlobalConfirmation",

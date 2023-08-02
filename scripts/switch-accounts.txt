@@ -1,0 +1,22 @@
+
+Items to switch between prod and dev.
+
+- Check credentials in ~/.aws/credentials. Switch to dev account.
+
+- the file examples/multi-runner-cppal/secrets.auto.tfvars must be in place. It is customized and somewhat different between each account. Nearly all variables in that file are different.
+
+- examples/multi-runner-cppal/templates/runner-configs/* . Switch between these with a script:
+
+Main account:
+ami_owners: [ "047402373783" ]
+
+Test account, boost v2:
+ami_owners: [ "254949769574" ]
+
+- examples/multi-runner-cppal/templates/runner-configs/*  ami_filter varies. Execute dev_amis.sh or prod_amis.sh to switch between them.
+
+- Use docker registry or not. This is handled automatically if DISABLE_DOCKER_REGISTRY has been set in the dev.pkrvars.hcl file in the images dirs.
+
+- ssh keys vary. This should now be handled by ssh_keypair_name and ssh_private_key_file in the dev.pkrvars.hcl file in the images dirs.
+
+- in the script packerimages.sh set the variable such as build_environment=dev

@@ -8,6 +8,9 @@ region = "us-west-2"
 instance_type = "t4g.xlarge"
 tester1="$${PATH}"
 root_volume_size_gb = 30
+ssh_keypair_name = "cppalliance-us-west-2-kp"
+ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
+
 custom_shell_commands = [
 "set -xe",
 "sudo mkdir -p /etc/apt/apt.conf.d/",
@@ -31,7 +34,7 @@ custom_shell_commands = [
 "sudo systemctl stop unattended-upgrades",
 "sudo systemctl disable unattended-upgrades",
 "sudo apt-get purge -y unattended-upgrades",
-"echo '{\n  \"insecure-registries\":[\"docker-registry-lb-1.cpp.al\"],\n  \"registry-mirrors\": [\"http://docker-registry-lb-1.cpp.al\"]\n }' | sudo tee /etc/docker/daemon.json"
+"$DISABLE_DOCKER_REGISTRY || echo '{\n  \"insecure-registries\":[\"docker-registry-lb-1.cpp.al\"],\n  \"registry-mirrors\": [\"http://docker-registry-lb-1.cpp.al\"]\n }' | sudo tee /etc/docker/daemon.json"
 ]
 
 # # Custom LLVM install. Switching to standard clang packages.

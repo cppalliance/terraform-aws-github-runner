@@ -17,6 +17,11 @@ variable "aws_region" {
   default = "us-west-2"
 }
 
+variable "key_name" {
+  type    = string
+  default = "cppalliance-us-west-2-kp"
+}
+
 variable "aws_default_vpc" {
   type    = string
   default = null
