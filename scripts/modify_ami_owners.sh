@@ -4,7 +4,7 @@ set -xe
 
 # Prod
 ami_account=047402373783
-# 
+#
 # Test account, boost v2:
 ami_account=254949769574
 

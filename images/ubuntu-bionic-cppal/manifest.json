@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "name": "githubrunner",
+      "builder_type": "amazon-ebs",
+      "build_time": 1691076099,
+      "files": null,
+      "artifact_id": "us-west-2:ami-09882530fd7b06926",
+      "packer_run_uuid": "c38681f5-7f9a-1388-8772-a63bb87b5d08",
+      "custom_data": null
+    }
+  ],
+  "last_run_uuid": "c38681f5-7f9a-1388-8772-a63bb87b5d08"
+}

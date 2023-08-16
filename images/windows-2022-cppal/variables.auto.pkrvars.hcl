@@ -11,6 +11,7 @@ ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
 custom_shell_commands = [
+"Set-PSDebug -Trace 1",
 "cd C:\\",
 "choco feature enable -n allowGlobalConfirmation",
 "# if --version is mentioned, the version has been checked, and the package installed",
@@ -74,7 +75,9 @@ custom_shell_commands = [
 "# choco install -y wsl",
 "choco install -y python --version 3.11.3",
 "New-Item -ItemType SymbolicLink -Path \"C:\\Git\" -Target \"C:\\Program Files\\Git\"",
-"# Adding visualstudio2022",
+"echo Adding visualstudio2022",
+"# visualstudio2022-workload-vctools failed last time. Add a sleep command.",
+"Start-Sleep -Seconds 10",
 "choco install visualstudio2022-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.34.17.4.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
 "$${oldpath} = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path",
 "$${newpath} = \"C:\\Git\\usr\\bin;$${oldpath}\"",
@@ -85,6 +88,6 @@ custom_shell_commands = [
 
 "net user /add Administrator2 Testwin1234!",
 "net localgroup administrators Administrator2 /add",
-"echo almost done",
-"pwd"
+"Set-LocalUser -Name 'Administrator2' -PasswordNeverExpires 1",
+"echo __done__"
 ]

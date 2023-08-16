@@ -18,12 +18,6 @@ build_environment=prod
 # windows-2022-cppal
 
 imagestobuild="
-ubuntu-bionic-arm64-cppal
-ubuntu-bionic-cppal
-ubuntu-focal-arm64-cppal
-ubuntu-focal-cppal
-ubuntu-jammy-arm64-cppal
-ubuntu-jammy-cppal
 windows-2019-cppal
 windows-2022-cppal
 "
