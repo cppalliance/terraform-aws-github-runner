@@ -11,6 +11,7 @@ ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
 custom_shell_commands = [
+"Set-PSDebug -Trace 1",
 "cd C:\\",
 "# already installed: powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))",
 "choco feature enable -n allowGlobalConfirmation",
@@ -72,6 +73,6 @@ custom_shell_commands = [
 "copy \"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.18362.0\\x64\\rcdll.dll\" \"C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x86\\rcdll.dll\"",
 "net user /add Administrator2 Testwin1234!",
 "net localgroup administrators Administrator2 /add",
-"echo almost done",
-"pwd"
+"Set-LocalUser -Name 'Administrator2' -PasswordNeverExpires 1",
+"echo __done__"
 ]

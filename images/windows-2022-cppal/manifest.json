@@ -8,7 +8,25 @@
       "artifact_id": "us-west-2:ami-00916f8613dbf8b5b",
       "packer_run_uuid": "b0043129-f0ee-b545-9bd7-90d79b6ad1a2",
       "custom_data": null
+    },
+    {
+      "name": "githubrunner",
+      "builder_type": "amazon-ebs",
+      "build_time": 1692198462,
+      "files": null,
+      "artifact_id": "us-west-2:ami-00a9cd5e0d602aeac",
+      "packer_run_uuid": "7cf34c3b-2118-deb2-adb0-032cfe1b5d3c",
+      "custom_data": null
+    },
+    {
+      "name": "githubrunner",
+      "builder_type": "amazon-ebs",
+      "build_time": 1692203467,
+      "files": null,
+      "artifact_id": "us-west-2:ami-029863b793a310918",
+      "packer_run_uuid": "76e2992b-3db9-be5f-1cb5-640aa3466534",
+      "custom_data": null
     }
   ],
-  "last_run_uuid": "b0043129-f0ee-b545-9bd7-90d79b6ad1a2"
+  "last_run_uuid": "76e2992b-3db9-be5f-1cb5-640aa3466534"
 }
