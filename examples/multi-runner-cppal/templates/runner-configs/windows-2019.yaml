@@ -23,12 +23,12 @@ runner_config:
   scale_down_schedule_expression: cron(* * * * ? *)
   runner_boot_time_in_minutes: 20
   ami_owners: [ "047402373783" ]
-  ami_filter: { 'name': ['github-runner-windows-2019-amd64-202308161544'] }
+  ami_filter: { 'name': ['github-runner-windows-2019-amd64-202308172004'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
       volume_type: gp3
-      volume_size: 60
+      volume_size: 70
       encrypted: true
       iops: null
       throughput: null

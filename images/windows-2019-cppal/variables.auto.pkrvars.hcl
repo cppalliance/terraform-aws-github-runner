@@ -6,7 +6,8 @@
 # packer build . | tee output.out 2>&1
 region = "us-west-2"
 instance_type = "t2.xlarge"
-root_volume_size_gb = 60
+# 2019 set to 70GB. 2022 60GB, for now.
+root_volume_size_gb = 70
 ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
