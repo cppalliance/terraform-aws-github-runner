@@ -13,6 +13,8 @@ ami_owners: [ "047402373783" ]
 Test account, boost v2:
 ami_owners: [ "254949769574" ]
 
+To change this, run ./modify_ami_owners.sh
+
 - examples/multi-runner-cppal/templates/runner-configs/*  ami_filter varies. Execute dev_amis.sh or prod_amis.sh to switch between them.
 
 - Use docker registry or not. This is handled automatically if DISABLE_DOCKER_REGISTRY has been set in the dev.pkrvars.hcl file in the images dirs.
