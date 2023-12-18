@@ -18,7 +18,7 @@ build_environment=prod
 # windows-2022-cppal
 
 imagestobuild="
-windows-2019-cppal
+windows-2022-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then
