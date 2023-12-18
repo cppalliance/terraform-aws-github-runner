@@ -6,7 +6,7 @@
 # packer build . | tee output.out 2>&1
 region = "us-west-2"
 instance_type = "t2.xlarge"
-root_volume_size_gb = 60
+root_volume_size_gb = 70
 ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
@@ -22,7 +22,7 @@ custom_shell_commands = [
 "# with visualstudio2022buildtools and visualstudio2019-workload-vctools. Warnings and errors. Commenting out:",
 "# choco install -y visualstudio2019buildtools",
 "# choco install visualstudio2019-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
-"choco install -y visualstudio2022buildtools --version 117.6.5.0",
+"choco install -y visualstudio2022buildtools --parameters  \"--add Microsoft.VisualStudio.Component.VC.Llvm.Clang --add Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset --add Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Llvm.Clang --add Microsoft.VisualStudio.Component.VC.CMake.Project\"",
 "choco install -y 7zip.install --version 22.1",
 "# automatic",
 "# choco install -y chocolatey --version 1.31",
@@ -33,7 +33,7 @@ custom_shell_commands = [
 "# choco install -y chocolatey-visualstudio.extension --version 1.10.2",
 "# choco install -y chocolatey-windowsupdate.extension --version 1.0.5",
 "# cmake not in path without extra flag",
-"choco install -y cmake.install --installargs '\"ADD_CMAKE_TO_PATH=System\"' --version 3.26.3",
+"choco install -y cmake.install --installargs '\"ADD_CMAKE_TO_PATH=System\"' --version 3.27.9",
 "choco install -y curl --version 8.0.1",
 "# choco install -y DotNet4.5.2 ",
 "# choco install -y DotNet4.6 ",
@@ -80,6 +80,7 @@ custom_shell_commands = [
 "echo Adding visualstudio2022",
 "# visualstudio2022-workload-vctools failed last time. Add a sleep command.",
 "Start-Sleep -Seconds 10",
+" # This should be rewritten with fewer quotes, group all together.",
 "choco upgrade visualstudio2022-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.34.17.4.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
 "$${oldpath} = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path",
 "$${newpath} = \"C:\\Git\\usr\\bin;$${oldpath}\"",
