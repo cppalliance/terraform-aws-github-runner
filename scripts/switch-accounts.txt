@@ -13,12 +13,18 @@ ami_owners: [ "047402373783" ]
 Test account, boost v2:
 ami_owners: [ "254949769574" ]
 
-To change this, run ./modify_ami_owners.sh
+To change this, run ./modify_ami_owners.sh. (can this script be enhanced?).
 
 - examples/multi-runner-cppal/templates/runner-configs/*  ami_filter varies. Execute dev_amis.sh or prod_amis.sh to switch between them.
 
 - Use docker registry or not. This is handled automatically if DISABLE_DOCKER_REGISTRY has been set in the dev.pkrvars.hcl file in the images dirs.
 
-- ssh keys vary. This should now be handled by ssh_keypair_name and ssh_private_key_file in the dev.pkrvars.hcl file in the images dirs.
+- ssh keys vary. This should now be handled by ssh_keypair_name and ssh_private_key_file in the dev.pkrvars.hcl file in the images dirs when building packer images.
 
 - in the script packerimages.sh set the variable such as build_environment=dev
+
+- Run terraform normally, in either prod or dev. It will generate 'state', so deployments should be kept in completely separate directories at all times. However, the
+  code may be synced, if all the above steps have been followed.
+  Currently prod is using the main cppal account, and run in admin-server.cpp.al:/opt/github/cppalliance/terraform-aws-github-runner
+  Dev is using the boost v2 aws account and run in localhost:~/github/samd2/terraform-aws-github-runner
+

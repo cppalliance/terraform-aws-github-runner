@@ -13,12 +13,14 @@ build_environment=prod
 # ubuntu-focal-arm64-cppal
 # ubuntu-focal-cppal
 # ubuntu-jammy-arm64-cppal
+# ubuntu-noble-cppal
+# ubuntu-noble-arm64-cppal
 # ubuntu-jammy-cppal
 # windows-2019-cppal
 # windows-2022-cppal
 
 imagestobuild="
-windows-2022-cppal
+ubuntu-noble-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then
