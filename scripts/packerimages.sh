@@ -60,6 +60,9 @@ task(){
     sed -i "s/ami_filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
 
     # Update ami_file also, with the same value
+    if ! fgrep "all_amis[$runnertemplate]" ${ami_file}; then
+        sed -i "s/# all_amis - keep this line/# all_amis - keep this line\nall_amis[$runnertemplate]=X/" $mainfolder/scripts/${ami_file}
+    fi
     newline="all_amis[$runnertemplate]=$ami_name"
     sed -i "s/all_amis\[$runnertemplate\]=.*/$newline/g" $mainfolder/scripts/${ami_file}
     echo "build completed"

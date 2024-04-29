@@ -13,7 +13,7 @@ ami_owners: [ "047402373783" ]
 Test account, boost v2:
 ami_owners: [ "254949769574" ]
 
-To change this, run ./modify_ami_owners.sh. (can this script be enhanced?).
+To change this, run ./modify_ami_owners.sh.
 
 - examples/multi-runner-cppal/templates/runner-configs/*  ami_filter varies. Execute dev_amis.sh or prod_amis.sh to switch between them.
 
@@ -27,4 +27,3 @@ To change this, run ./modify_ami_owners.sh. (can this script be enhanced?).
   code may be synced, if all the above steps have been followed.
   Currently prod is using the main cppal account, and run in admin-server.cpp.al:/opt/github/cppalliance/terraform-aws-github-runner
   Dev is using the boost v2 aws account and run in localhost:~/github/samd2/terraform-aws-github-runner
-
