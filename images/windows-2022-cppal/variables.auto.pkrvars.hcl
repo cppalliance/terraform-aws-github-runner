@@ -6,7 +6,8 @@
 # packer build . | tee output.out 2>&1
 region = "us-west-2"
 instance_type = "t2.xlarge"
-root_volume_size_gb = 70
+# 2024-09 size was 70. Add 10 for the jobs, and 10 for the pagefile.
+root_volume_size_gb = 90
 ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
@@ -49,7 +50,7 @@ custom_shell_commands = [
 "# choco install -y KB2999226 --version 1.0.20181019",
 "# choco install -y KB3033929 --version 1.0.5",
 "# choco install -y KB3035131 --version 1.0.3",
-"choco install -y llvm --version 16.0.3",
+"choco install -y llvm --version 18.1.8",
 "choco install -y microsoft-build-tools --version 15.0.26320.2",
 "choco install -y mingw --version 12.2.0.03042023",
 "# no:",
@@ -81,7 +82,9 @@ custom_shell_commands = [
 "# visualstudio2022-workload-vctools failed last time. Add a sleep command.",
 "Start-Sleep -Seconds 10",
 " # This should be rewritten with fewer quotes, group all together.",
-"choco upgrade visualstudio2022-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.34.17.4.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
+"# one previous version",
+"# choco upgrade visualstudio2022-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.34.17.4.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
+"choco upgrade visualstudio2022-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.41.17.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
 "$${oldpath} = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path",
 "$${newpath} = \"C:\\Git\\usr\\bin;$${oldpath}\"",
 "Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $${newPath}",
@@ -92,5 +95,15 @@ custom_shell_commands = [
 "net user /add Administrator2 Testwin1234!",
 "net localgroup administrators Administrator2 /add",
 "Set-LocalUser -Name 'Administrator2' -PasswordNeverExpires 1",
+
+" # Set page file",
+"$ComputerSystem = Get-WmiObject -ClassName Win32_ComputerSystem",
+"$ComputerSystem.AutomaticManagedPagefile = $false",
+"$ComputerSystem.Put()",
+"$PageFileSetting = Get-WmiObject -ClassName Win32_PageFileSetting",
+"$PageFileSetting.InitialSize = 10000",
+"$PageFileSetting.MaximumSize = 10000",
+"$PageFileSetting.Put()",
+
 "echo __done__"
 ]
