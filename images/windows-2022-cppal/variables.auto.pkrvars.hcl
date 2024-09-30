@@ -7,7 +7,8 @@
 region = "us-west-2"
 instance_type = "t2.xlarge"
 # 2024-09 size was 70. Add 10 for the jobs, and 10 for the pagefile.
-root_volume_size_gb = 90
+# then another 10 for the pagefile.
+root_volume_size_gb = 100
 ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
@@ -101,8 +102,8 @@ custom_shell_commands = [
 "$ComputerSystem.AutomaticManagedPagefile = $false",
 "$ComputerSystem.Put()",
 "$PageFileSetting = Get-WmiObject -ClassName Win32_PageFileSetting",
-"$PageFileSetting.InitialSize = 10000",
-"$PageFileSetting.MaximumSize = 10000",
+"$PageFileSetting.InitialSize = 20000",
+"$PageFileSetting.MaximumSize = 20000",
 "$PageFileSetting.Put()",
 
 "echo __done__"
