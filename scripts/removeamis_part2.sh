@@ -10,8 +10,15 @@ test="
 "
 
 amis="
-ami-0684483d95ae2455d
-ami-0a1bdeb7c56066cb3
+ami-0277289baef564826
+ami-0ff57019d58bc9864
+ami-0b96e11dcf82c291b
+ami-062ad1cc2717270dd
+ami-0801bbce25c2c36e4
+ami-0ba0f860382ff00e0
+ami-051a8bf1576abee25
+ami-0abe5c21e1b8652d1
+ami-0c24080c9e1ecdf92
 "
 
 region=us-west-2

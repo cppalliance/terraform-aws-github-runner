@@ -13,14 +13,14 @@ build_environment=prod
 # ubuntu-focal-arm64-cppal
 # ubuntu-focal-cppal
 # ubuntu-jammy-arm64-cppal
-# ubuntu-noble-cppal
-# ubuntu-noble-arm64-cppal
 # ubuntu-jammy-cppal
+# ubuntu-noble-arm64-cppal
+# ubuntu-noble-cppal
 # windows-2019-cppal
 # windows-2022-cppal
 
 imagestobuild="
-ubuntu-noble-cppal
+ubuntu-jammy-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then
@@ -60,7 +60,7 @@ task(){
     sed -i "s/ami_filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
 
     # Update ami_file also, with the same value
-    if ! fgrep "all_amis[$runnertemplate]" ${ami_file}; then
+    if ! fgrep "all_amis[$runnertemplate]=" $mainfolder/scripts/${ami_file}; then
         sed -i "s/# all_amis - keep this line/# all_amis - keep this line\nall_amis[$runnertemplate]=X/" $mainfolder/scripts/${ami_file}
     fi
     newline="all_amis[$runnertemplate]=$ami_name"

@@ -17,7 +17,34 @@
       "artifact_id": "us-west-2:ami-033177fd61cf8e25d",
       "packer_run_uuid": "bfa632c9-1896-4006-5a2c-42871d15c695",
       "custom_data": null
+    },
+    {
+      "name": "githubrunner",
+      "builder_type": "amazon-ebs",
+      "build_time": 1727706245,
+      "files": null,
+      "artifact_id": "us-west-2:ami-062ad1cc2717270dd",
+      "packer_run_uuid": "8115035e-e830-0ec8-7cc6-dfd47ec8daa7",
+      "custom_data": null
+    },
+    {
+      "name": "githubrunner",
+      "builder_type": "amazon-ebs",
+      "build_time": 1727709756,
+      "files": null,
+      "artifact_id": "us-west-2:ami-0d15c32796376f610",
+      "packer_run_uuid": "48d0e3ac-b417-bc98-65ce-c994d7f5b23a",
+      "custom_data": null
+    },
+    {
+      "name": "githubrunner",
+      "builder_type": "amazon-ebs",
+      "build_time": 1728081020,
+      "files": null,
+      "artifact_id": "us-west-2:ami-039061904b8542322",
+      "packer_run_uuid": "75a2c1f5-38fd-5242-2f78-799258ac57ac",
+      "custom_data": null
     }
   ],
-  "last_run_uuid": "bfa632c9-1896-4006-5a2c-42871d15c695"
+  "last_run_uuid": "75a2c1f5-38fd-5242-2f78-799258ac57ac"
 }
