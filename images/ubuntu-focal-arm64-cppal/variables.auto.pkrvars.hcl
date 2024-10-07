@@ -31,6 +31,11 @@ custom_shell_commands = [
 "sudo systemctl stop unattended-upgrades",
 "sudo systemctl disable unattended-upgrades",
 "sudo apt-get purge -y unattended-upgrades",
+"sudo systemctl disable apt-daily-upgrade.timer || true",
+"sudo systemctl stop apt-daily-upgrade.timer || true",
+"sudo systemctl disable apt-daily.timer || true",
+"sudo systemctl stop apt-daily.timer || true",
+
 "$DISABLE_DOCKER_REGISTRY || echo '{\n  \"insecure-registries\":[\"docker-registry-lb-1.cpp.al\"],\n  \"registry-mirrors\": [\"http://docker-registry-lb-1.cpp.al\"]\n }' | sudo tee /etc/docker/daemon.json"
 ]
 
