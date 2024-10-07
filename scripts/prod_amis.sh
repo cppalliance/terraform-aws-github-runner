@@ -8,16 +8,24 @@ set -xe
 declare -A all_amis
 
 # all_amis - keep this line
-all_amis[ubuntu-bionic-arm64.yaml]=github-runner-ubuntu-bionic-arm64-202308031506
-all_amis[ubuntu-bionic.yaml]=github-runner-ubuntu-bionic-amd64-202308031506
-all_amis[ubuntu-focal-arm64.yaml]=github-runner-ubuntu-focal-arm64-202308031506
-all_amis[ubuntu-focal.yaml]=github-runner-ubuntu-focal-amd64-202308031506
-all_amis[ubuntu-jammy-arm64.yaml]=github-runner-ubuntu-jammy-arm64-202308031506
-all_amis[ubuntu-jammy.yaml]=github-runner-ubuntu-jammy-amd64-202308031506
-all_amis[ubuntu-noble-arm64.yaml]=github-runner-ubuntu-noble-arm64-202404261611
-all_amis[ubuntu-noble.yaml]=github-runner-ubuntu-noble-amd64-202404261624
+all_amis[ubuntu-jammy.yaml]=github-runner-ubuntu-jammy-amd64-202410042200
+all_amis[ubuntu-jammy-arm64.yaml]=github-runner-ubuntu-jammy-arm64-202410042028
+all_amis[ubuntu-bionic.yaml]=github-runner-ubuntu-bionic-amd64-202410042028
+all_amis[ubuntu-focal.yaml]=github-runner-ubuntu-focal-amd64-202410042028
+all_amis[ubuntu-focal-arm64.yaml]=github-runner-ubuntu-focal-arm64-202410042028
+all_amis[ubuntu-noble.yaml]=github-runner-ubuntu-noble-amd64-202410042028
+all_amis[ubuntu-bionic-arm64.yaml]=github-runner-ubuntu-bionic-arm64-202410042028
+all_amis[ubuntu-noble-arm64.yaml]=github-runner-ubuntu-noble-arm64-202410042028
+all_amis[ubuntu-bionic-arm64.yaml]=github-runner-ubuntu-bionic-arm64-202410042028
+all_amis[ubuntu-bionic.yaml]=github-runner-ubuntu-bionic-amd64-202410042028
+all_amis[ubuntu-focal-arm64.yaml]=github-runner-ubuntu-focal-arm64-202410042028
+all_amis[ubuntu-focal.yaml]=github-runner-ubuntu-focal-amd64-202410042028
+all_amis[ubuntu-jammy-arm64.yaml]=github-runner-ubuntu-jammy-arm64-202410042028
+all_amis[ubuntu-jammy.yaml]=github-runner-ubuntu-jammy-amd64-202410042200
+all_amis[ubuntu-noble-arm64.yaml]=github-runner-ubuntu-noble-arm64-202410042028
+all_amis[ubuntu-noble.yaml]=github-runner-ubuntu-noble-amd64-202410042028
 all_amis[windows-2019.yaml]=github-runner-windows-2019-amd64-202308172004
-all_amis[windows-2022.yaml]=github-runner-windows-2022-amd64-202409161453
+all_amis[windows-2022.yaml]=github-runner-windows-2022-amd64-202409272156
 
 # Update the templates with the above values
 
