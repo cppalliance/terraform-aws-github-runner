@@ -12,7 +12,7 @@ custom_shell_commands = [
 "sudo mkdir -p /etc/apt/apt.conf.d/",
 "echo 'APT::Acquire::Retries \"10\";' | sudo tee /etc/apt/apt.conf.d/80-retries",
 "echo 'APT::Get::Assume-Yes \"true\";' | sudo tee /etc/apt/apt.conf.d/90assumeyes",
-"sudo apt-get -o Acquire::Retries=3 update && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install tzdata && sudo apt-get -o Acquire::Retries=3 install -y sudo software-properties-common rsync wget curl apt-transport-https git make apt-file sudo unzip libssl-dev build-essential autotools-dev autoconf automake g++ python3 python3-pip ruby cpio pkgconf ccache && sudo apt-get install -y gcc-multilib || true && sudo apt-get install -y g++-multilib || true",
+"sudo apt-get -o Acquire::Retries=3 update && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install tzdata && sudo apt-get -o Acquire::Retries=3 install -y sudo software-properties-common rsync wget curl apt-transport-https git make apt-file sudo unzip libssl-dev build-essential autotools-dev autoconf automake g++ python3 python3-pip ruby cpio pkgconf ccache locales && sudo apt-get install -y gcc-multilib || true && sudo apt-get install -y g++-multilib || true",
 "sudo apt-add-repository ppa:git-core/ppa",
 "sudo apt-get -o Acquire::Retries=3 update && sudo apt-get -o Acquire::Retries=3 -y install git",
 "sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y",

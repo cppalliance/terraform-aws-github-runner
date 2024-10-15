@@ -16,7 +16,7 @@ custom_shell_commands = [
 "sudo mkdir -p /etc/apt/apt.conf.d/",
 "echo 'APT::Acquire::Retries \"10\";' | sudo tee /etc/apt/apt.conf.d/80-retries",
 "echo 'APT::Get::Assume-Yes \"true\";' | sudo tee /etc/apt/apt.conf.d/90assumeyes",
-"sudo apt-get -o Acquire::Retries=3 update && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install tzdata && sudo apt-get -o Acquire::Retries=3 install -y sudo software-properties-common rsync wget curl apt-transport-https git make apt-file sudo unzip libssl-dev build-essential autotools-dev autoconf automake g++ libc++-helpers python python-pip ruby cpio pkgconf python3 python3-pip ccache libpython-dev && sudo apt-get install -y gcc-multilib g++-multilib || true",
+"sudo apt-get -o Acquire::Retries=3 update && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install tzdata && sudo apt-get -o Acquire::Retries=3 install -y sudo software-properties-common rsync wget curl apt-transport-https git make apt-file sudo unzip libssl-dev build-essential autotools-dev autoconf automake g++ libc++-helpers python python-pip ruby cpio pkgconf python3 python3-pip ccache locales libpython-dev && sudo apt-get install -y gcc-multilib g++-multilib || true",
 "sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y",
 "sudo apt-get update -y",
 "sudo apt-get install -y clang-9",
