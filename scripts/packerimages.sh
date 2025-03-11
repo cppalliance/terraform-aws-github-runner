@@ -2,8 +2,8 @@
 
 set -xe
 
-# build_environment=dev
-build_environment=prod
+build_environment=dev
+# build_environment=prod
 
 # Builds multiple new AMI images and updates the files in examples/multi-runner-cppal/templates/runner-configs to point to those images
 # Instructions: Set the imagestobuild variable. Run the script: ./packerimages.sh | tee output.out 2>&1
@@ -20,14 +20,7 @@ build_environment=prod
 # windows-2022-cppal
 
 imagestobuild="
-ubuntu-bionic-arm64-cppal
-ubuntu-bionic-cppal
-ubuntu-focal-arm64-cppal
-ubuntu-focal-cppal
-ubuntu-jammy-arm64-cppal
-ubuntu-jammy-cppal
-ubuntu-noble-arm64-cppal
-ubuntu-noble-cppal
+windows-2019-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then
@@ -51,6 +44,7 @@ task(){
     echo "Building $thisimage"
     cd $mainfolder/images/$thisimage
     rm results.out || true
+    pwd
     packer build "${varfiles[@]}" . | tee output.out 2>&1
     echo "packer build successful" | tee results.out 2>&1
     # testing: echo "us-west-2: ami-0b5fa6619a10d7ca7" > output.out
