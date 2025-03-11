@@ -5,7 +5,8 @@
 # or
 # packer build .
 region = "us-west-2"
-instance_type = "t2.xlarge"
+# instance_type = "t2.xlarge"
+instance_type = "m5a.xlarge"
 root_volume_size_gb = 30
 ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"

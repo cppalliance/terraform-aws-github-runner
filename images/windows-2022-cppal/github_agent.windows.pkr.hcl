@@ -7,6 +7,11 @@ packer {
   }
 }
 
+aws_polling {
+  delay_seconds = 60
+  max_attempts  = 120
+}
+
 variable "ssh_keypair_name" {
   description = "SSH keypair name"
   type        = string
