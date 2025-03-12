@@ -9,7 +9,7 @@ region = "us-west-2"
 instance_type = "m5a.xlarge"
 # 2024-09 size was 70. Add 10 for the jobs, and 10 for the pagefile.
 # then another 10 for the pagefile.
-root_volume_size_gb = 100
+root_volume_size_gb = 110
 ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
@@ -17,6 +17,7 @@ custom_shell_commands = [
 "Set-PSDebug -Trace 1",
 "cd C:\\",
 "choco feature enable -n allowGlobalConfirmation",
+"choco feature disable --name='ignoreInvalidOptionsSwitches'",
 "# if --version is mentioned, the version has been checked, and the package installed",
 "# automatic",
 "# choco install -y visualstudio2017buildtools --version 15.9.54.0",
@@ -24,8 +25,8 @@ custom_shell_commands = [
 "# Note 2023-08-17: visualstudio2019buildtools and visualstudio2019-workload-vctools no longer appear to be compatible",
 "# with visualstudio2022buildtools and visualstudio2019-workload-vctools. Warnings and errors. Commenting out:",
 "# choco install -y visualstudio2019buildtools",
-"# choco install visualstudio2019-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
-"choco install -y visualstudio2022buildtools --parameters  \"--add Microsoft.VisualStudio.Component.VC.Llvm.Clang --add Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset --add Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Llvm.Clang --add Microsoft.VisualStudio.Component.VC.CMake.Project\"",
+"# choco install visualstudio2019-workload-vctools --package-parameters '--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64 --add Microsoft.VisualStudio.Component.VC.v141.x86.x64 --add Microsoft.VisualStudio.Component.VC.140' -y",
+"choco install -y visualstudio2022buildtools --parameters  '--add Microsoft.VisualStudio.Component.VC.Llvm.Clang --add Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset --add Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Llvm.Clang --add Microsoft.VisualStudio.Component.VC.CMake.Project'",
 "choco install -y 7zip.install --version 22.1",
 "# automatic",
 "# choco install -y chocolatey --version 1.31",
@@ -85,8 +86,8 @@ custom_shell_commands = [
 "Start-Sleep -Seconds 10",
 " # This should be rewritten with fewer quotes, group all together.",
 "# one previous version",
-"# choco upgrade visualstudio2022-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.34.17.4.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
-"choco upgrade visualstudio2022-workload-vctools --package-parameters \"--add Microsoft.VisualStudio.Component.VC.14.41.17.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.v141.x86.x64\" \"--add Microsoft.VisualStudio.Component.VC.140\" -y ",
+"# choco upgrade visualstudio2022-workload-vctools --package-parameters '--add Microsoft.VisualStudio.Component.VC.14.34.17.4.x86.x64 --add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64 --add Microsoft.VisualStudio.Component.VC.v141.x86.x64 --add Microsoft.VisualStudio.Component.VC.140' -y",
+"choco upgrade visualstudio2022-workload-vctools --package-parameters '--add Microsoft.VisualStudio.Component.VC.14.41.17.11.x86.x64 --add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64 --add Microsoft.VisualStudio.Component.VC.v141.x86.x64 --add Microsoft.VisualStudio.Component.VC.140' -y",
 "$${oldpath} = (Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH).path",
 "$${newpath} = \"C:\\Git\\usr\\bin;$${oldpath}\"",
 "Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Environment' -Name PATH -Value $${newPath}",

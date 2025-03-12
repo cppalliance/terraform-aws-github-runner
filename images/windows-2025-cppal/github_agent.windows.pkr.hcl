@@ -92,7 +92,7 @@ locals {
 source "amazon-ebs" "githubrunner" {
   ssh_keypair_name            = var.ssh_keypair_name
   ssh_private_key_file        = var.ssh_private_key_file
-  ami_name                    = "github-runner-windows-2022-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
+  ami_name                    = "github-runner-windows-2025-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
   communicator                = "winrm"
   instance_type               = var.instance_type
   region                      = var.region
@@ -102,7 +102,7 @@ source "amazon-ebs" "githubrunner" {
 
   source_ami_filter {
     filters = {
-      name                = "Windows_Server-2022-English-Full-ECS_Optimized-*"
+      name                = "Windows_Server-2025-English-Full-Base-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
@@ -110,7 +110,7 @@ source "amazon-ebs" "githubrunner" {
     owners      = ["amazon"]
   }
   tags = {
-    OS_Version    = "windows-core-2022"
+    OS_Version    = "windows-core-2025"
     Release       = "Latest"
     Base_AMI_Name = "{{ .SourceAMIName }}"
   }
@@ -138,6 +138,103 @@ build {
       start_runner = templatefile("../../modules/runners/templates/start-runner.ps1", {})
     })
     destination = "C:\\start-runner.ps1"
+  }
+
+  provisioner "file" {
+  content = <<EOT
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="7zip.install" />
+  <package id="awscli" />
+  <package id="chocolatey" />
+  <package id="chocolatey-compatibility.extension" />
+  <package id="chocolatey-core.extension" />
+  <package id="chocolatey-dotnetfx.extension" />
+  <package id="chocolatey-visualstudio.extension" />
+  <package id="chocolatey-windowsupdate.extension" />
+  <package id="curl" />
+  <package id="dotnetfx" />
+  <package id="git" />
+  <package id="git.install" />
+  <package id="hashdeep" />
+  <package id="jq" />
+  <package id="KB2919355" />
+  <package id="KB2919442" />
+  <package id="KB2999226" />
+  <package id="KB3033929" />
+  <package id="KB3035131" />
+  <package id="llvm" />
+  <package id="microsoft-build-tools" />
+  <package id="mingw" />
+  <package id="notepadplusplus" />
+  <package id="notepadplusplus.install" />
+  <package id="python" />
+  <package id="python3" />
+  <package id="python313" />
+  <package id="rsync" />
+  <package id="ruby" />
+  <package id="ruby.install" />
+  <package id="vcredist140" />
+  <package id="vcredist2015" />
+  <package id="vcredist2017" />
+  <package id="visualstudio2017buildtools" />
+  <package id="visualstudio-installer" />
+  <package id="Wget" />
+  <package id="windows-sdk-10.1" />
+  <package id="winscp" />
+  <package id="winscp.install" />
+</packages>
+EOT
+
+    destination = "C:\\tmp\\packages.prebuild.noversions.config"
+  }
+
+  provisioner "file" {
+  content = <<EOT
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="7zip.install" version="22.1" />
+  <package id="awscli" version="2.24.17" />
+  <package id="chocolatey" version="2.4.3" />
+  <package id="chocolatey-compatibility.extension" version="1.0.0" />
+  <package id="chocolatey-core.extension" version="1.4.0" />
+  <package id="chocolatey-dotnetfx.extension" version="1.0.1" />
+  <package id="chocolatey-visualstudio.extension" version="1.11.1" />
+  <package id="chocolatey-windowsupdate.extension" version="1.0.5" />
+  <package id="curl" version="8.12.1" />
+  <package id="dotnetfx" version="4.8.0.20220524" />
+  <package id="git" version="2.48.1" />
+  <package id="git.install" version="2.48.1" />
+  <package id="hashdeep" version="4.4" />
+  <package id="jq" version="1.7.1" />
+  <package id="KB2919355" version="1.0.20160915" />
+  <package id="KB2919442" version="1.0.20160915" />
+  <package id="KB2999226" version="1.0.20181019" />
+  <package id="KB3033929" version="1.0.5" />
+  <package id="KB3035131" version="1.0.3" />
+  <package id="llvm" version="19.1.7" />
+  <package id="microsoft-build-tools" version="15.0.26320.2" />
+  <package id="mingw" version="13.2.0" />
+  <package id="notepadplusplus" version="8.7.7" />
+  <package id="notepadplusplus.install" version="8.7.7" />
+  <package id="python" version="3.13.1" />
+  <package id="python3" version="3.13.1" />
+  <package id="python313" version="3.13.1" />
+  <package id="rsync" version="6.3.0" />
+  <package id="ruby" version="3.4.1.1" />
+  <package id="ruby.install" version="3.4.1.1" />
+  <package id="vcredist140" version="14.42.34438.20250221" />
+  <package id="vcredist2015" version="14.0.24215.20170201" />
+  <package id="vcredist2017" version="14.16.27052" />
+  <package id="visualstudio2017buildtools" version="15.9.70" />
+  <package id="visualstudio-installer" version="2.0.3" />
+  <package id="Wget" version="1.21.4" />
+  <package id="windows-sdk-10.1" version="10.1.18362.1" />
+  <package id="winscp" version="6.3.7" />
+  <package id="winscp.install" version="6.3.7" />
+</packages>
+EOT
+    destination = "C:\\tmp\\packages.prebuild.versions.config"
   }
 
   provisioner "powershell" {
