@@ -18,7 +18,7 @@ all_amis[ubuntu-noble.yaml]=github-runner-ubuntu-noble-amd64-202411261305
 all_amis[ubuntu-noble-arm64.yaml]=github-runner-ubuntu-noble-arm64-202410151633
 all_amis[windows-2019.yaml]=github-runner-windows-2019-amd64-202503111933
 all_amis[windows-2022.yaml]=github-runner-windows-2022-amd64-202503112051
-all_amis[windows-2025.yaml]=github-runner-windows-2025-amd64-202503112051
+all_amis[windows-2025.yaml]=github-runner-windows-2025-amd64-202504151722
 
 # Update the templates with the above values
 

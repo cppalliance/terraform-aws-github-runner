@@ -21,7 +21,6 @@ build_environment=prod
 # windows-2025-cppal
 
 imagestobuild="
-windows-2022-cppal
 windows-2025-cppal
 "
 
