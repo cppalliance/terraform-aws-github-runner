@@ -16,8 +16,9 @@ runner_config:
   enable_ssm_on_runners: true
   credit_specification: standard
   # m5.2xlarge is 32GB
+  # 2025-04-26, let's set that as the first and main choice.
   instance_types:
-    - c5.2xlarge
+    # - c5.2xlarge
     - m5.2xlarge
   runners_maximum_count: 100
   delay_webhook_event: 0
