@@ -18,9 +18,11 @@ build_environment=dev
 # ubuntu-noble-cppal
 # windows-2019-cppal
 # windows-2022-cppal
+# windows-2025-cppal
 
 imagestobuild="
-windows-2019-cppal
+windows-2022-cppal
+windows-2025-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then

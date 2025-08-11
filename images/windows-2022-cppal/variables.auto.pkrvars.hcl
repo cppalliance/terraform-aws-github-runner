@@ -8,7 +8,7 @@ region = "us-west-2"
 instance_type = "t2.xlarge"
 # 2024-09 size was 70. Add 10 for the jobs, and 10 for the pagefile.
 # then another 10 for the pagefile.
-root_volume_size_gb = 100
+root_volume_size_gb = 110
 ssh_keypair_name = "cppalliance-us-west-2-kp"
 ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
