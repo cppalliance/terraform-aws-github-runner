@@ -8,16 +8,19 @@ ami_account=047402373783
 # Test account, boost v2:
 ami_account=254949769574
 
-# imagestobuild="
-# ubuntu-bionic-arm64-cppal
-# ubuntu-bionic-cppal
-# ubuntu-focal-arm64-cppal
-# ubuntu-focal-cppal
-# ubuntu-jammy-arm64-cppal
-# ubuntu-jammy-cppal
-# windows-2019-cppal
-# windows-2022-cppal
-# "
+imagestobuild="
+ubuntu-bionic-arm64-cppal
+ubuntu-bionic-cppal
+ubuntu-focal-arm64-cppal
+ubuntu-focal-cppal
+ubuntu-jammy-arm64-cppal
+ubuntu-jammy-cppal
+ubuntu-noble-arm64-cppal
+ubuntu-noble-cppal
+windows-2019-cppal
+windows-2022-cppal
+windows-2025-cppal
+"
 
 timestamp=$(date +%Y%m%d_%H%M%S)
 cd ..

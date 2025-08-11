@@ -23,8 +23,9 @@ runner_config:
   delay_webhook_event: 0
   scale_down_schedule_expression: cron(* * * * ? *)
   runner_boot_time_in_minutes: 20
-  ami_owners: [ "047402373783" ]
-  ami_filter: { 'name': ['github-runner-windows-2022-amd64-202503112051'], 'state': ["available"] }
+  ami:
+    owners: [ "254949769574" ]
+    filter: { 'name': ['github-runner-windows-2022-amd64-202508111835'], 'state': ["available"] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true

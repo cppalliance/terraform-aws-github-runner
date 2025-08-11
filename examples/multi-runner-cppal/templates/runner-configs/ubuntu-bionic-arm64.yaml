@@ -28,8 +28,8 @@ runner_config:
   scale_down_schedule_expression: cron(* * * * ? *)
   # userdata_template: ./templates/user-data.sh
   ami:
-    owners: [ "047402373783" ]
-    filter: { 'name': ['github-runner-ubuntu-bionic-arm64-202410151633'] }
+    owners: [ "254949769574" ]
+    filter: { 'name': ['github-runner-ubuntu-bionic-arm64-202308022332'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true

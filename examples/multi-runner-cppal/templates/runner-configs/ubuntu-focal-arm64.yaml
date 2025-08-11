@@ -28,7 +28,7 @@ runner_config:
   scale_down_schedule_expression: cron(* * * * ? *)
   # userdata_template: ./templates/user-data.sh
   ami:
-    owners: [ "047402373783" ]
+    owners: [ "254949769574" ]
     filter: { 'name': ['github-runner-ubuntu-focal-arm64-202508111835'] }
   block_device_mappings:
     - device_name: /dev/sda1
