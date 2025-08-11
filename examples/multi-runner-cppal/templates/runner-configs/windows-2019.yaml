@@ -24,7 +24,7 @@ runner_config:
   runner_boot_time_in_minutes: 20
   ami:
     owners: [ "047402373783" ]
-    filter: { 'name': ['github-runner-windows-2019-amd64-202508111835'] }
+  ami_filter: { 'name': ['github-runner-windows-2019-amd64-202508111835'], 'state': ["available"] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
