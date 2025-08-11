@@ -42,6 +42,12 @@ variable "instance_type" {
   default     = "t3a.medium"
 }
 
+variable "iam_instance_profile" {
+  description = "IAM instance profile Packer will use for the builder. An empty string (default) means no profile will be assigned."
+  type        = string
+  default     = ""
+}
+
 variable "security_group_id" {
   description = "The ID of the security group Packer will associate with the builder to enable access"
   type        = string
@@ -77,6 +83,12 @@ variable "custom_shell_commands" {
   default     = []
 }
 
+variable "temporary_security_group_source_public_ip" {
+  description = "When enabled, use public IP of the host (obtained from https://checkip.amazonaws.com) as CIDR block to be authorized access to the instance, when packer is creating a temporary security group. Note: If you specify `security_group_id` then this input is ignored."
+  type        = bool
+  default     = false
+}
+
 data "http" github_runner_release_json {
   url = "https://api.github.com/repos/actions/runner/releases/latest"
   request_headers = {
@@ -95,10 +107,12 @@ source "amazon-ebs" "githubrunner" {
   ami_name                    = "github-runner-windows-2022-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
   communicator                = "winrm"
   instance_type               = var.instance_type
+  iam_instance_profile        = var.iam_instance_profile
   region                      = var.region
   security_group_id           = var.security_group_id
   subnet_id                   = var.subnet_id
   associate_public_ip_address = var.associate_public_ip_address
+  temporary_security_group_source_public_ip = var.temporary_security_group_source_public_ip
 
   source_ami_filter {
     filters = {

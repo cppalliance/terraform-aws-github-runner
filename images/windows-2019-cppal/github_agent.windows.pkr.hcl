@@ -42,6 +42,12 @@ variable "instance_type" {
   default     = "t3a.medium"
 }
 
+variable "iam_instance_profile" {
+  description = "IAM instance profile Packer will use for the builder. An empty string (default) means no profile will be assigned."
+  type        = string
+  default     = ""
+}
+
 variable "ebs_delete_on_termination" {
   description = "Indicates whether the EBS volume is deleted on instance termination."
   type        = bool
@@ -58,6 +64,12 @@ variable "custom_shell_commands" {
   description = "Additional commands to run on the EC2 instance, to customize the instance, like installing packages"
   type        = list(string)
   default     = []
+}
+
+variable "temporary_security_group_source_public_ip" {
+  description = "When enabled, use public IP of the host (obtained from https://checkip.amazonaws.com) as CIDR block to be authorized access to the instance, when packer is creating a temporary security group. Note: If you specify `security_group_id` then this input is ignored."
+  type        = bool
+  default     = false
 }
 
 variable "root_volume_size_gb" {
@@ -83,8 +95,10 @@ source "amazon-ebs" "githubrunner" {
   ami_name                    = "github-runner-windows-2019-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
   communicator                = "winrm"
   instance_type               = var.instance_type
+  iam_instance_profile        = var.iam_instance_profile
   region                      = var.region
   associate_public_ip_address = var.associate_public_ip_address
+  temporary_security_group_source_public_ip = var.temporary_security_group_source_public_ip
 
   source_ami_filter {
     filters = {

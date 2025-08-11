@@ -32,8 +32,8 @@ task(){
     runnertemplate="${thisimage%-cppal}"
     # backup. perhaps not needed.
     # cp ${runnertemplatefolder}/${runnertemplate} ${bckfolder}/${runnertemplate}.${timestamp}
-    newline="ami_owners: [ \"$ami_account\" ]";
-    sed -i "s/ami_owners:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
+    newline="owners: [ \"$ami_account\" ]";
+    sed -i "s/owners:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
 }
 
 imagestobuild=$(ls -1 ${mainfolder}/examples/multi-runner-cppal/templates/runner-configs | grep -v bcks)
