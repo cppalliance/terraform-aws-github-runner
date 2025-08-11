@@ -131,7 +131,7 @@ source "amazon-ebs" "githubrunner" {
 
   source_ami_filter {
     filters = {
-      name                = "*/ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-arm64-server-*"
+      name                = "*/ubuntu-bionic-18.04-arm64-server-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }

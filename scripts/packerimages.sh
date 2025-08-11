@@ -21,17 +21,8 @@ build_environment=dev
 # windows-2025-cppal
 
 imagestobuild="
-ubuntu-bionic-arm64-cppal
-ubuntu-bionic-cppal
-ubuntu-focal-arm64-cppal
-ubuntu-focal-cppal
 ubuntu-jammy-arm64-cppal
 ubuntu-jammy-cppal
-ubuntu-noble-arm64-cppal
-ubuntu-noble-cppal
-windows-2019-cppal
-windows-2022-cppal
-windows-2025-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then

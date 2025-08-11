@@ -77,7 +77,8 @@ module "base" {
   aws_region = local.aws_region
 }
 
-module "runners" {
+# module "runners" {
+module "multi-runner" {
   source              = "../../modules/multi-runner"
   multi_runner_config = local.multi_runner_config
   #  Alternative to loading runner configuration from Yaml files is using static configuration:
@@ -156,14 +157,14 @@ module "runners" {
   # }
 }
 
-module "webhook_github_app" {
-  source     = "../../modules/webhook-github-app"
-  depends_on = [module.runners]
-
-  github_app = {
-    key_base64     = var.github_app.key_base64
-    id             = var.github_app.id
-    webhook_secret = random_id.random.hex
-  }
-  webhook_endpoint = module.runners.webhook.endpoint
-}
+# module "webhook_github_app" {
+#   source     = "../../modules/webhook-github-app"
+#   depends_on = [module.runners]
+# 
+#   github_app = {
+#     key_base64     = var.github_app.key_base64
+#     id             = var.github_app.id
+#     webhook_secret = random_id.random.hex
+#   }
+#   webhook_endpoint = module.runners.webhook.endpoint
+# }
