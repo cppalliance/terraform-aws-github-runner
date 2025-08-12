@@ -131,7 +131,7 @@ source "amazon-ebs" "githubrunner" {
 
   source_ami_filter {
     filters = {
-      name                = "*/ubuntu-noble-24.04-arm64-server-*"
+      name                = "*ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-arm64-server-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }

@@ -31,7 +31,7 @@ runner_config:
   # userdata_template: ./templates/user-data.sh
   ami:
     owners: [ "254949769574" ]
-    filter: { 'name': ['github-runner-ubuntu-noble-amd64-202508111958'] }
+    filter: { 'name': ['github-runner-ubuntu-noble-amd64-202508121658'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
