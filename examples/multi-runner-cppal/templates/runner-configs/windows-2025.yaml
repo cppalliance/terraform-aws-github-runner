@@ -16,8 +16,7 @@ runner_config:
   enable_ssm_on_runners: true
   credit_specification: standard
   instance_types:
-    - m5.xlarge
-    - c5.xlarge
+    - m5.2xlarge
   runners_maximum_count: 100
   delay_webhook_event: 0
   scale_down_schedule_expression: cron(* * * * ? *)
