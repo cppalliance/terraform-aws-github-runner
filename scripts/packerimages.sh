@@ -2,6 +2,9 @@
 
 set -xe
 
+export AWS_MAX_ATTEMPTS=300
+export AWS_POLL_DELAY_SECONDS=30
+
 build_environment=dev
 # build_environment=prod
 
@@ -21,8 +24,9 @@ build_environment=dev
 # windows-2025-cppal
 
 imagestobuild="
-ubuntu-jammy-arm64-cppal
-ubuntu-jammy-cppal
+windows-2019-cppal
+windows-2022-cppal
+windows-2025-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then
