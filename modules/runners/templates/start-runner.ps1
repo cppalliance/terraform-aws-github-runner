@@ -181,15 +181,34 @@ $taskExecutable = "run.cmd"
 $taskArgument = $null
 
 if ($agent_mode -eq "ephemeral") {
-    if ($enable_jit_config -eq "true") {
-        Write-Host "Starting with jit config"
-        $taskExecutable = "run.cmd"
-        $taskArgument = "--jitconfig $${config}"
+    $taskExecutable = "start-runner-service.ps1"
+	if (Test-Path $taskExecutable) {
+	    Remove-Item "$taskExecutable"
+    }
+	if ($enable_jit_config -eq "true") {
+        Write-Output 'Write-Host "Starting with jit config"' | Out-File -Append -FilePath "$taskExecutable"
+        Write-Output ".\run.cmd --jitconfig $${config}" | Out-File -Append -FilePath "$taskExecutable"
     }
     else {
-        Write-Host "Starting without jit config"
-        $taskExecutable = "run.cmd"
+        Write-Output 'Write-Host "Starting without jit config"' | Out-File -Append -FilePath "$taskExecutable"
+        Write-Output ".\run.cmd" | Out-File -Append -FilePath "$taskExecutable"
     }
+
+	if ($enable_cloudwatch_agent)
+    {
+	    $outputstring = @"
+Write-Host `"Stopping CloudWatch Agent`"
+& 'C:\Program Files\Amazon\AmazonCloudWatchAgent\amazon-cloudwatch-agent-ctl.ps1' -a stop
+"@
+
+		$outputstring | Out-File -Append -FilePath "$taskExecutable"
+    }
+
+	$outputstring = @"
+Write-Host `"Terminating instance`"
+aws ec2 terminate-instances --instance-ids `"$InstanceId`" --region `"$Region`"
+"@
+    $outputstring | Out-File -Append -FilePath "$taskExecutable"
 }
 
 Write-Host  "Installing the runner as a service"
