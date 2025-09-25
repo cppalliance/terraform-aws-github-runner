@@ -4,7 +4,6 @@
 function Tag-InstanceWithRunnerId {
     Write-Host "Checking for .runner file to extract agent ID"
 
-    # Note: $pwd is usually C:\actions-runner since the Task that calls start-runner.ps1 sets that as a working directory.
     $runnerFilePath = "$pwd\.runner"
     if (-not (Test-Path $runnerFilePath)) {
         Write-Host "Warning: .runner file not found"
@@ -182,39 +181,16 @@ $taskExecutable = "run.cmd"
 $taskArgument = $null
 
 if ($agent_mode -eq "ephemeral") {
-    $startRunnerService = "start-runner-service.ps1"
-    $taskExecutable = "PowerShell.exe"
-    $taskArgument = "-File $startRunnerService"
-    if (Test-Path $startRunnerService) {
-	    Remove-Item "$startRunnerService"
-    }
     if ($enable_jit_config -eq "true") {
-        Write-Output 'Write-Host "Starting with jit config"' | Out-File -Append -FilePath "$startRunnerService"
-        # Note: the double dollar signs are an artifact of Terraform since a single dollar sign and bracket would be 
-        # interpreted by the template.
-        Write-Output ".\run.cmd --jitconfig $${config}" | Out-File -Append -FilePath "$startRunnerService"
+        Write-Host "Starting with jit config"
+        $taskExecutable = "run.cmd"
+        $taskArgument = "--jitconfig $${config}"
     }
     else {
-        Write-Output 'Write-Host "Starting without jit config"' | Out-File -Append -FilePath "$startRunnerService"
-        Write-Output ".\run.cmd" | Out-File -Append -FilePath "$startRunnerService"
+        Write-Host "Starting without jit config"
+        $taskExecutable = "run.cmd"
     }
-
-    if ($enable_cloudwatch_agent)
-    {
-        $outputstring = @"
-Write-Host `"Stopping CloudWatch Agent`"
-& 'C:\Program Files\Amazon\AmazonCloudWatchAgent\amazon-cloudwatch-agent-ctl.ps1' -a stop
-"@
-
-        $outputstring | Out-File -Append -FilePath "$startRunnerService"
-    }
-
-        $outputstring = @"
-Write-Host `"Terminating instance`"
-aws ec2 terminate-instances --instance-ids `"$InstanceId`" --region `"$Region`"
-"@
-    $outputstring | Out-File -Append -FilePath "$startRunnerService"
-}
+} 
 
 Write-Host  "Installing the runner as a service"
 

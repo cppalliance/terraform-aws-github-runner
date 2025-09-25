@@ -8,6 +8,7 @@ redrive_build_queue:
   enabled: false
   maxReceiveCount: null
 runner_config:
+  enable_jit_config: true
   minimum_running_time_in_minutes: 15
   runner_boot_time_in_minutes: 15
   create_service_linked_role_spot: true
@@ -31,7 +32,7 @@ runner_config:
   # userdata_template: ./templates/user-data.sh
   ami:
     owners: [ "254949769574" ]
-    filter: { 'name': ['github-runner-ubuntu-noble-amd64-202508121658'] }
+    filter: { 'name': ['github-runner-ubuntu-noble-amd64-202509221822'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true

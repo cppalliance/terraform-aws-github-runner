@@ -110,7 +110,8 @@ cleanup() {
   fi
 }
 
-trap 'cleanup $? $LINENO $BASH_LINENO' EXIT
+# 2025-09 Testing if cleanup is causing the scale-down. I think it is. Comment it out.
+# trap 'cleanup $? $LINENO $BASH_LINENO' EXIT
 
 echo "Retrieving TOKEN from AWS API"
 token=$(curl -f -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 180" || true)
@@ -254,6 +255,8 @@ if [[ "$enable_jit_config" == "false" || $agent_mode != "ephemeral" ]]; then
   else
       extra_flags=""
   fi
+  # Note: The double dollar signs are an artifact of Terraform since a single dollar sign and bracket would be 
+  # interpreted by the template.
   sudo --preserve-env=RUNNER_ALLOW_RUNASROOT -u "$run_as" -- ./config.sh $${extra_flags} --unattended --name "$runner_name_prefix$instance_id" --work "_work" $${config}
 
   # Tag instance with GitHub runner agent ID for non-JIT runners

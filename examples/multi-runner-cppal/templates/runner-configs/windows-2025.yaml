@@ -4,6 +4,7 @@ matcherConfig:
     - [self-hosted, windows, x64, windows-2025-aws]
 fifo: true
 runner_config:
+  enable_jit_config: false
   create_service_linked_role_spot: true
   enable_ephemeral_runners: true
   instance_target_capacity_type: "on-demand"
@@ -26,7 +27,7 @@ runner_config:
   runner_boot_time_in_minutes: 20
   ami:
     owners: [ "254949769574" ]
-    filter: { 'name': ['github-runner-windows-2025-amd64-202508111835'], 'state': ["available"] }
+    filter: { 'name': ['github-runner-windows-2025-amd64-202509251757'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
