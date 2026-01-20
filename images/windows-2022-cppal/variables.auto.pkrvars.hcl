@@ -15,6 +15,7 @@ ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
 custom_shell_commands = [
 "Set-PSDebug -Trace 1",
+"$ErrorActionPreference = 'stop'",
 "cd C:\\",
 "choco feature enable -n allowGlobalConfirmation",
 "choco feature disable --name='ignoreInvalidOptionsSwitches'",
@@ -53,7 +54,7 @@ custom_shell_commands = [
 "# choco install -y KB2999226 --version 1.0.20181019",
 "# choco install -y KB3033929 --version 1.0.5",
 "# choco install -y KB3035131 --version 1.0.3",
-"choco install -y llvm --version 18.1.8",
+"choco install -y llvm --version 20.1.8",
 "choco install -y microsoft-build-tools --version 15.0.26320.2",
 "choco install -y mingw --version 12.2.0.03042023",
 "# no:",

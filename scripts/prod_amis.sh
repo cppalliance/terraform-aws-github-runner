@@ -28,6 +28,6 @@ runnertemplatefolder="${mainfolder}/examples/multi-runner-cppal/templates/runner
 cd ${runnertemplatefolder}
 for runnertemplate in "${!all_amis[@]}"; do
     ami_name="${all_amis[$runnertemplate]}"
-    newline="ami_filter: { 'name': ['${ami_name}'] }"
-    sed -i "s/ami_filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
+    newline="filter: { 'name': ['${ami_name}'] }"
+    sed -i "s/filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
 done

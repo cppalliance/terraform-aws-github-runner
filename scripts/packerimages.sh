@@ -2,6 +2,9 @@
 
 set -xe
 
+export AWS_MAX_ATTEMPTS=300
+export AWS_POLL_DELAY_SECONDS=30
+
 # build_environment=dev
 build_environment=prod
 
@@ -21,6 +24,16 @@ build_environment=prod
 # windows-2025-cppal
 
 imagestobuild="
+ubuntu-bionic-arm64-cppal
+ubuntu-bionic-cppal
+ubuntu-focal-arm64-cppal
+ubuntu-focal-cppal
+ubuntu-jammy-arm64-cppal
+ubuntu-jammy-cppal
+ubuntu-noble-arm64-cppal
+ubuntu-noble-cppal
+windows-2019-cppal
+windows-2022-cppal
 windows-2025-cppal
 "
 
@@ -57,8 +70,8 @@ task(){
     ami_name=$(aws ec2 describe-images --owners self --query 'Images[*].[Name,ImageId]' --output text --region us-west-2 | grep ${resultingami} | cut -f 1)
     echo "ami_name is ${ami_name}"
     # github-runner-ubuntu-jammy-amd64-202306021546
-    newline="ami_filter: { 'name': ['${ami_name}'] }"
-    sed -i "s/ami_filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
+    newline="filter: { 'name': ['${ami_name}'] }"
+    sed -i "s/filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
 
     # Update ami_file also, with the same value
     if ! fgrep "all_amis[$runnertemplate]=" $mainfolder/scripts/${ami_file}; then

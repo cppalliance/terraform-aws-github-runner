@@ -10,15 +10,15 @@ declare -A all_amis
 # all_amis - keep this line
 all_amis[ubuntu-bionic-arm64.yaml]=github-runner-ubuntu-bionic-arm64-202308022332
 all_amis[ubuntu-bionic.yaml]=github-runner-ubuntu-bionic-amd64-202308022332
-all_amis[ubuntu-focal-arm64.yaml]=github-runner-ubuntu-focal-arm64-202308022332
-all_amis[ubuntu-focal.yaml]=github-runner-ubuntu-focal-amd64-202308022332
-all_amis[ubuntu-jammy-arm64.yaml]=github-runner-ubuntu-jammy-arm64-202308022332
-all_amis[ubuntu-jammy.yaml]=github-runner-ubuntu-jammy-amd64-202308022332
-all_amis[ubuntu-noble-arm64.yaml]=github-runner-ubuntu-noble-arm64-202404291834
-all_amis[ubuntu-noble.yaml]=github-runner-ubuntu-noble-amd64-202404291834
-all_amis[windows-2019.yaml]=github-runner-windows-2019-amd64-202503111537
-all_amis[windows-2022.yaml]=github-runner-windows-2022-amd64-202503112049
-all_amis[windows-2025.yaml]=github-runner-windows-2025-amd64-202503112049
+all_amis[ubuntu-focal-arm64.yaml]=github-runner-ubuntu-focal-arm64-202508111835
+all_amis[ubuntu-focal.yaml]=github-runner-ubuntu-focal-amd64-202509221822
+all_amis[ubuntu-jammy-arm64.yaml]=github-runner-ubuntu-jammy-arm64-202508121717
+all_amis[ubuntu-jammy.yaml]=github-runner-ubuntu-jammy-amd64-202509221822
+all_amis[ubuntu-noble-arm64.yaml]=github-runner-ubuntu-noble-arm64-202508121658
+all_amis[ubuntu-noble.yaml]=github-runner-ubuntu-noble-amd64-202509221822
+all_amis[windows-2019.yaml]=github-runner-windows-2019-amd64-202509251757
+all_amis[windows-2022.yaml]=github-runner-windows-2022-amd64-202509251757
+all_amis[windows-2025.yaml]=github-runner-windows-2025-amd64-202509251757
 
 # Update the templates with the above values
 
@@ -28,6 +28,6 @@ runnertemplatefolder="${mainfolder}/examples/multi-runner-cppal/templates/runner
 cd ${runnertemplatefolder}
 for runnertemplate in "${!all_amis[@]}"; do
     ami_name="${all_amis[$runnertemplate]}"
-    newline="ami_filter: { 'name': ['${ami_name}'] }"
-    sed -i "s/ami_filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
+    newline="filter: { 'name': ['${ami_name}'] }"
+    sed -i "s/filter:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
 done

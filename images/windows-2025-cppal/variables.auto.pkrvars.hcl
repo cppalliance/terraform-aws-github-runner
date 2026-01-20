@@ -14,6 +14,7 @@ ssh_private_key_file = "/root/.ssh/cppalliance-us-west-2-kp.pem"
 
 custom_shell_commands = [
 "Set-PSDebug -Trace 1",
+"$ErrorActionPreference = 'stop'",
 "cd C:\\",
 "choco feature disable --name='ignoreInvalidOptionsSwitches'",
 "New-Item -Path 'c:\\tmp' -ItemType Directory -Force",

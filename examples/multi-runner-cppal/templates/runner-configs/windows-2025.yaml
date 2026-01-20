@@ -4,6 +4,7 @@ matcherConfig:
     - [self-hosted, windows, x64, windows-2025-aws]
 fifo: true
 runner_config:
+  enable_jit_config: true
   create_service_linked_role_spot: true
   enable_ephemeral_runners: true
   instance_target_capacity_type: "on-demand"
@@ -11,7 +12,7 @@ runner_config:
   runner_os: windows
   runner_run_as: Administrator
   runner_architecture: x64
-  runner_extra_labels: "windows-2025-aws"
+  runner_extra_labels: ["windows-2025-aws"]
   runner_name_prefix: windows-2025-x64_
   enable_ssm_on_runners: true
   credit_specification: standard
@@ -24,8 +25,9 @@ runner_config:
   delay_webhook_event: 0
   scale_down_schedule_expression: cron(* * * * ? *)
   runner_boot_time_in_minutes: 20
-  ami_owners: [ "047402373783" ]
-  ami_filter: { 'name': ['github-runner-windows-2025-amd64-202504151722'] }
+  ami:
+    owners: [ "047402373783" ]
+    filter: { 'name': ['github-runner-windows-2025-amd64-202509251757'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true

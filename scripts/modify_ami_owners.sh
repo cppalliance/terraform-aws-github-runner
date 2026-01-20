@@ -6,18 +6,21 @@ set -xe
 ami_account=047402373783
 #
 # Test account, boost v2:
-ami_account=254949769574
+# ami_account=254949769574
 
-# imagestobuild="
-# ubuntu-bionic-arm64-cppal
-# ubuntu-bionic-cppal
-# ubuntu-focal-arm64-cppal
-# ubuntu-focal-cppal
-# ubuntu-jammy-arm64-cppal
-# ubuntu-jammy-cppal
-# windows-2019-cppal
-# windows-2022-cppal
-# "
+imagestobuild="
+ubuntu-bionic-arm64-cppal
+ubuntu-bionic-cppal
+ubuntu-focal-arm64-cppal
+ubuntu-focal-cppal
+ubuntu-jammy-arm64-cppal
+ubuntu-jammy-cppal
+ubuntu-noble-arm64-cppal
+ubuntu-noble-cppal
+windows-2019-cppal
+windows-2022-cppal
+windows-2025-cppal
+"
 
 timestamp=$(date +%Y%m%d_%H%M%S)
 cd ..
@@ -32,8 +35,8 @@ task(){
     runnertemplate="${thisimage%-cppal}"
     # backup. perhaps not needed.
     # cp ${runnertemplatefolder}/${runnertemplate} ${bckfolder}/${runnertemplate}.${timestamp}
-    newline="ami_owners: [ \"$ami_account\" ]";
-    sed -i "s/ami_owners:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
+    newline="owners: [ \"$ami_account\" ]";
+    sed -i "s/owners:.*/$newline/g" ${runnertemplatefolder}/${runnertemplate}
 }
 
 imagestobuild=$(ls -1 ${mainfolder}/examples/multi-runner-cppal/templates/runner-configs | grep -v bcks)
