@@ -9,7 +9,7 @@ export AWS_POLL_DELAY_SECONDS=30
 build_environment=prod
 
 # Builds multiple new AMI images and updates the files in examples/multi-runner-cppal/templates/runner-configs to point to those images
-# Instructions: Set the imagestobuild variable. Run the script: ./packerimages.sh | tee output.out 2>&1
+# Instructions: Set the imagestobuild variable. Run the script: ./packerimages.sh | tee packeroutput.out 2>&1
 
 # ubuntu-bionic-arm64-cppal
 # ubuntu-bionic-cppal
@@ -24,14 +24,6 @@ build_environment=prod
 # windows-2025-cppal
 
 imagestobuild="
-ubuntu-bionic-arm64-cppal
-ubuntu-bionic-cppal
-ubuntu-focal-arm64-cppal
-ubuntu-focal-cppal
-ubuntu-jammy-arm64-cppal
-ubuntu-jammy-cppal
-ubuntu-noble-arm64-cppal
-ubuntu-noble-cppal
 windows-2019-cppal
 windows-2022-cppal
 windows-2025-cppal
