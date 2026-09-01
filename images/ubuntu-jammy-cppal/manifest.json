@@ -71,7 +71,16 @@
       "artifact_id": "us-west-2:ami-0d88991f63664c102",
       "packer_run_uuid": "a9d95e77-b31b-3183-98e0-ac73c1d79700",
       "custom_data": null
+    },
+    {
+      "name": "githubrunner",
+      "builder_type": "amazon-ebs",
+      "build_time": 1788286440,
+      "files": null,
+      "artifact_id": "us-west-2:ami-06f56c43a2c0e1e89",
+      "packer_run_uuid": "d578caa8-7d41-f801-7a16-739e6f19e74e",
+      "custom_data": null
     }
   ],
-  "last_run_uuid": "a9d95e77-b31b-3183-98e0-ac73c1d79700"
+  "last_run_uuid": "d578caa8-7d41-f801-7a16-739e6f19e74e"
 }
