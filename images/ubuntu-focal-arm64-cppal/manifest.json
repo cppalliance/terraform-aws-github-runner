@@ -57,12 +57,12 @@
     {
       "name": "githubrunner",
       "builder_type": "amazon-ebs",
-      "build_time": 1788202931,
+      "build_time": 1778602949,
       "files": null,
-      "artifact_id": "us-west-2:ami-06cabe2e6e6d6a92a",
-      "packer_run_uuid": "1e93b563-39f7-ede3-2053-6d38d143d033",
+      "artifact_id": "us-west-2:ami-04121226d36282f70",
+      "packer_run_uuid": "3bc69efe-db6b-302c-f0a4-1ea3c3099999",
       "custom_data": null
     }
   ],
-  "last_run_uuid": "1e93b563-39f7-ede3-2053-6d38d143d033"
+  "last_run_uuid": "3bc69efe-db6b-302c-f0a4-1ea3c3099999"
 }
