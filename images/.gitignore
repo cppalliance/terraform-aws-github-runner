@@ -14,7 +14,9 @@ crash.log
 # version control as they are data points which are potentially sensitive and
 # subject to change depending on the environment.
 #
-*.pkrvars.hcl
+
+# 2026-08 S.D. Keep these, exclude specific files
+# *.pkrvars.hcl
 
 # For built boxes
 *.box
