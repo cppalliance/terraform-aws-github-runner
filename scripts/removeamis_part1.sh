@@ -4,6 +4,30 @@
 
 set -e
 
+usage() {
+    echo "Usage: $0 -e <dev|prod>"
+    echo "  -e  Environment (required): dev or prod"
+    exit 1
+}
+
+while getopts "e:" opt; do
+    case "$opt" in
+        e) build_environment="$OPTARG" ;;
+        *) usage ;;
+    esac
+done
+
+if [ "$build_environment" != "dev" ] && [ "$build_environment" != "prod" ]; then
+    echo "ERROR: -e <dev|prod> is required"
+    usage
+fi
+
+if [ "$build_environment" = "dev" ]; then
+    export AWS_PROFILE=tagr-packer-dev
+else
+    export AWS_PROFILE=tagr-packer-prod
+fi
+
 region=us-west-2
 amis=""
 

@@ -2,6 +2,7 @@ matcherConfig:
   exactMatch: true
   labelMatchers:
     - [self-hosted, windows, x64, windows-2025-aws]
+    - [self-hosted, windows, x64, "windows-latest-aws"]
 fifo: true
 runner_config:
   enable_jit_config: true
@@ -12,7 +13,7 @@ runner_config:
   runner_os: windows
   runner_run_as: Administrator
   runner_architecture: x64
-  runner_extra_labels: ["windows-2025-aws"]
+  runner_extra_labels: ["windows-2025-aws", "windows-latest-aws"]
   runner_name_prefix: windows-2025-x64_
   enable_ssm_on_runners: true
   credit_specification: standard

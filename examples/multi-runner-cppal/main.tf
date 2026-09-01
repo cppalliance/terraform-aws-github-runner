@@ -107,9 +107,10 @@ module "runners" {
   key_name                          = var.key_name
   vpc_id                            = module.base.vpc.vpc_id
   subnet_ids                        = module.base.vpc.private_subnets
-  runners_scale_up_lambda_timeout   = 60
-  runners_scale_down_lambda_timeout = 60
-  prefix                            = local.environment
+  runners_scale_up_lambda_timeout       = 60
+  runners_scale_down_lambda_timeout     = 60
+  matcher_config_parameter_store_tier   = "Advanced"
+  prefix                                = local.environment
   tags = {
     Project = "ProjectX"
   }

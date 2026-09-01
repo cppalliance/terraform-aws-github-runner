@@ -2,14 +2,65 @@
 
 set -xe
 
+usage() {
+    echo "Usage: $0 -e <dev|prod>"
+    echo "  -e  Environment (required): dev or prod"
+    exit 1
+}
+
+while getopts "e:" opt; do
+    case "$opt" in
+        e) build_environment="$OPTARG" ;;
+        *) usage ;;
+    esac
+done
+
+if [ "$build_environment" != "dev" ] && [ "$build_environment" != "prod" ]; then
+    echo "ERROR: -e <dev|prod> is required"
+    usage
+fi
+
+# Set AWS profile so Packer and aws CLI use the right credentials.
+# Profiles are expected in ~/.aws/credentials:
+#   [tagr-packer-dev]  for dev
+#   [tagr-packer-prod] for prod
+if [ "$build_environment" = "dev" ]; then
+    export AWS_PROFILE=tagr-packer-dev
+    TF_PROFILE=tagr-dev
+else
+    export AWS_PROFILE=tagr-packer-prod
+    TF_PROFILE=tagr-prod
+fi
+
+# Verify the AWS profiles actually exist (packer + terraform)
+missing_profiles=""
+for profile in "$AWS_PROFILE" "$TF_PROFILE"; do
+    if ! aws configure list --profile "$profile" > /dev/null 2>&1; then
+        echo "ERROR: AWS profile '$profile' not found in ~/.aws/credentials or ~/.aws/config"
+        missing_profiles="$missing_profiles  $profile"$'\n'
+    fi
+done
+if [ -n "$missing_profiles" ]; then
+    echo ""
+    echo "Please add these profiles to ~/.aws/credentials:"
+    echo "  tagr-packer-$build_environment   (used by Packer)"
+    echo "  tagr-$build_environment          (used by Terraform)"
+    exit 1
+fi
+
 export AWS_MAX_ATTEMPTS=300
 export AWS_POLL_DELAY_SECONDS=30
 
-# build_environment=dev
-build_environment=prod
+: <<'INSTALL_NOTES'
+# Install Packer and Terraform on an Ubuntu laptop:
+
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install packer terraform
+INSTALL_NOTES
 
 # Builds multiple new AMI images and updates the files in examples/multi-runner-cppal/templates/runner-configs to point to those images
-# Instructions: Set the imagestobuild variable. Run the script: ./packerimages.sh | tee packeroutput.out 2>&1
+# Instructions: Set the imagestobuild variable. Run the script: ./packerimages.sh -e dev | tee packeroutput.out 2>&1
 
 # ubuntu-bionic-arm64-cppal
 # ubuntu-bionic-cppal
@@ -19,22 +70,32 @@ build_environment=prod
 # ubuntu-jammy-cppal
 # ubuntu-noble-arm64-cppal
 # ubuntu-noble-cppal
+# ubuntu-resolute-arm64-cppal
+# ubuntu-resolute-cppal
 # windows-2019-cppal
 # windows-2022-cppal
 # windows-2025-cppal
 
 imagestobuild="
+ubuntu-bionic-arm64-cppal
+ubuntu-bionic-cppal
+ubuntu-focal-arm64-cppal
+ubuntu-focal-cppal
+ubuntu-jammy-arm64-cppal
+ubuntu-jammy-cppal
+ubuntu-noble-arm64-cppal
+ubuntu-noble-cppal
 windows-2019-cppal
 windows-2022-cppal
 windows-2025-cppal
 "
 
 if [ "$build_environment" = "dev" ]; then
-    echo "dev environment"
+    echo "dev environment (AWS_PROFILE=$AWS_PROFILE)"
     varfiles=(-var-file="variables.auto.pkrvars.hcl" -var-file="dev.pkrvars.hcl")
     ami_file=dev_amis.sh
 else
-    echo "prod environment"
+    echo "prod environment (AWS_PROFILE=$AWS_PROFILE)"
     varfiles=(-var-file="variables.auto.pkrvars.hcl")
     ami_file=prod_amis.sh
 fi
@@ -42,6 +103,26 @@ fi
 timestamp=$(date +%Y%m%d_%H%M%S)
 cd ..
 mainfolder=$(pwd)
+
+# Preflight: every image must have a corresponding runner config template.
+# packerimages.sh updates these templates with the new AMI name after each
+# build, so they must exist before we start.
+runnertemplatefolder="${mainfolder}/examples/multi-runner-cppal/templates/runner-configs"
+missing_configs=""
+for image in $imagestobuild; do
+    runnertemplate="${runnertemplatefolder}/${image%-cppal}.yaml"
+    if [ ! -f "$runnertemplate" ]; then
+        echo "ERROR: runner config template not found: $runnertemplate"
+        missing_configs="$missing_configs  $runnertemplate"$'\n'
+    fi
+done
+if [ -n "$missing_configs" ]; then
+    echo ""
+    echo "Missing runner configs. Copy them from a similar OS, e.g.:"
+    echo "  cp templates/runner-configs/ubuntu-noble.yaml templates/runner-configs/ubuntu-resolute.yaml"
+    echo ""
+    exit 1
+fi
 
 task(){
     set -xe

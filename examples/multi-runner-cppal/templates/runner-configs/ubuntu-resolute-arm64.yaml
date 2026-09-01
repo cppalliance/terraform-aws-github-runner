@@ -1,7 +1,8 @@
 matcherConfig:
   exactMatch: true
   labelMatchers:
-    - [ self-hosted, linux, x64, ubuntu-24.04-aws ]
+    - [ self-hosted, linux, arm64, ubuntu-latest-aws ]
+    - [ self-hosted, linux, arm64, ubuntu-26.04-aws ]
 fifo: true
 redrive_build_queue:
   enabled: false
@@ -15,22 +16,22 @@ runner_config:
   instance_target_capacity_type: "on-demand"
   enable_userdata: false
   runner_os: linux
-  runner_architecture: x64
-  runner_extra_labels: ["ubuntu-24.04-aws"]
+  runner_architecture: arm64
+  runner_extra_labels: ["ubuntu-latest-aws","ubuntu-26.04-aws"]
   runner_run_as: ubuntu
-  runner_name_prefix: ubuntu-2404-x64_
+  runner_name_prefix: ubuntu-2604-arm64_
   enable_ssm_on_runners: true
   credit_specification: standard
   instance_types:
-    - m5a.xlarge
-    - m5ad.xlarge
-  runners_maximum_count: 200
+    - t4g.xlarge
+    - c6g.xlarge
+  runners_maximum_count: 50
   delay_webhook_event: 0
   scale_down_schedule_expression: cron(* * * * ? *)
   # userdata_template: ./templates/user-data.sh
   ami:
     owners: [ "047402373783" ]
-    filter: { 'name': ['github-runner-ubuntu-noble-amd64-202601211431'] }
+    filter: { 'name': ['github-runner-ubuntu-resolute-arm64-__'] }
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true

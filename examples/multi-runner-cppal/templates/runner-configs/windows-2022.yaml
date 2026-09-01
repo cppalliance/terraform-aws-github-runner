@@ -1,7 +1,6 @@
 matcherConfig:
   exactMatch: true
   labelMatchers:
-    - [self-hosted, windows, x64, windows-latest-aws]
     - [self-hosted, windows, x64, windows-2022-aws]
 fifo: true
 runner_config:
@@ -15,7 +14,7 @@ runner_config:
   runner_os: windows
   runner_run_as: Administrator
   runner_architecture: x64
-  runner_extra_labels: ["windows-latest-aws","windows-2022-aws"]
+  runner_extra_labels: ["windows-2022-aws"]
   runner_name_prefix: windows-2022-x64_
   enable_ssm_on_runners: true
   credit_specification: standard

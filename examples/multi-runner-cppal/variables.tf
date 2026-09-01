@@ -20,6 +20,13 @@ variable "aws_region" {
   default = "us-west-2"
 }
 
+variable "aws_profile" {
+  description = "AWS profile for provider authentication (e.g. tagr-dev, tagr-prod)"
+
+  type    = string
+  default = null
+}
+
 variable "key_name" {
   type    = string
   default = "cppalliance-us-west-2-kp"
