@@ -24,8 +24,10 @@ fi
 
 if [ "$build_environment" = "dev" ]; then
     export AWS_PROFILE=tagr-packer-dev
+    ami_list=dev_amis.sh
 else
     export AWS_PROFILE=tagr-packer-prod
+    ami_list=prod_amis.sh
 fi
 
 region=us-west-2
@@ -47,6 +49,9 @@ for result in $results; do
     ami_id=$(echo "$result" | cut -f2)
     # echo "ami_id is $ami_id"
     if grep $ami_name ../examples/multi-runner-cppal/templates/runner-configs/*.yaml ; then
+        # ami is in use
+        true
+    elif grep $ami_name $ami_list ; then
         # ami is in use
         true
     else
