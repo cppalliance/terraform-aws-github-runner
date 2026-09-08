@@ -30,3 +30,4 @@ secrets.auto.tfvars
 node_modules/
 site/
 scripts/scratch.txt
+tmp/
